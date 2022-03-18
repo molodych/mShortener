@@ -14,13 +14,13 @@ func NewUrlRepository() *urlRepository {
 }
 
 func (*urlRepository) GetByKey(ctx context.Context, key string) (result bson.M, err error) {
-	collection := ctx.Value("mongo-client").(*mongo.Client).Database("mShorterDB").Collection("urls")
+	collection := ctx.Value("mongo-client").(*mongo.Database).Collection("urls")
 	err = collection.FindOne(ctx, bson.M{"key": key}).Decode(&result)
 	return
 }
 
 func (*urlRepository) Create(ctx context.Context, url map[string]string) (err error) {
-	collection := ctx.Value("mongo-client").(*mongo.Client).Database("mShorterDB").Collection("urls")
+	collection := ctx.Value("mongo-client").(*mongo.Database).Collection("urls")
 	_, err = collection.InsertOne(ctx, bson.M{"key": url["key"], "url": url["url"]})
 	return err
 }

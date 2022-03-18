@@ -10,7 +10,7 @@ func HTTPDBClientMongo() echo.MiddlewareFunc {
 		return func(c echo.Context) error {
 			req := c.Request()
 			ctx := req.Context()
-			ctx = context.WithValue(ctx, "mongo-client", GetMongoClient())
+			ctx = context.WithValue(ctx, "mongo-client", GetMongoClient("mShorterDB"))
 			c.SetRequest(req.WithContext(ctx))
 			return next(c)
 		}

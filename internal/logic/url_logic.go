@@ -52,7 +52,7 @@ func normalizationUrl(url string) (string, error) {
 	if !strings.Contains(url, ".") {
 		return "", errors.New("Url is incorrect")
 	}
-	if !strings.Contains(url, "http://") || !strings.Contains(url, "https://") {
+	if !strings.Contains(url, "http://") && !strings.Contains(url, "https://") {
 		url = "http://" + url
 	}
 	return url, nil
